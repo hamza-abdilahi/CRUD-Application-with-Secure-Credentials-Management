@@ -36,7 +36,6 @@
     "Application.CrudApplication.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "settings.editor.selected.configurable": "org.intellij.sdk.settings.AppSettingsConfigurable"
   }
