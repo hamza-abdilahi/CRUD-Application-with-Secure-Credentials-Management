@@ -1,38 +1,50 @@
 package CRUD_Application.model;
 
-public class productCatalog {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+public class ProductCatalog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int price;
-    private int productCode;
-    private String itemName ;
+    private Long id;
+
+    private String productCode;
+    private String itemName;
+    private Double price;
     private String description;
     private String category;
     private String colour;
 
+    // Constructors, getters, and setters
+    public ProductCatalog() {
+    }
 
-    public productCatalog(int price, int productCode, String itemName, String description, String category, String colour) {
-        this.price = price;
+    public ProductCatalog(String productCode, String itemName, Double price, String description, String category, String colour) {
         this.productCode = productCode;
         this.itemName = itemName;
+        this.price = price;
         this.description = description;
         this.category = category;
         this.colour = colour;
     }
 
-    public int getPrice() {
-        return price;
+    public Long getId() {
+        return id;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public int getProductCode() {
+    public String getProductCode() {
         return productCode;
     }
 
-    public void setProductCode(int productCode) {
+    public void setProductCode(String productCode) {
         this.productCode = productCode;
     }
 
@@ -42,6 +54,14 @@ public class productCatalog {
 
     public void setItemName(String itemName) {
         this.itemName = itemName;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getDescription() {
@@ -66,17 +86,5 @@ public class productCatalog {
 
     public void setColour(String colour) {
         this.colour = colour;
-    }
-
-    @Override
-    public String toString() {
-        return "productCatalog{" +
-                "price=" + price +
-                ", productCode=" + productCode +
-                ", itemName='" + itemName + '\'' +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", colour='" + colour + '\'' +
-                '}';
     }
 }
