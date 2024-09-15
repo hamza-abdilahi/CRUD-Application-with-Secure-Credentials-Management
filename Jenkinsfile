@@ -13,7 +13,6 @@ pipeline {
                 echo 'Building..'
                 sh '''
                     echo 'doing build stuff..'
-                    # Add actual build commands here, e.g. mvn clean install
                 '''
             }
         }
@@ -22,7 +21,6 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh '''
-                    # Add test commands here, e.g. mvn test
                     echo 'running tests..'
                 '''
             }
@@ -31,14 +29,8 @@ pipeline {
         stage('Deliver') {
             steps {
                 echo 'Delivering application..'
-                // Add delivery commands here
             }
         }
     }
 
-    post {
-        always {
-            // Post build actions such as archiving artifacts or publishing test results
-        }
-    }
 }
