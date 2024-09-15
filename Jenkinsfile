@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'dev', url: 'https://github.com/hamza-abdilahi/CRUD-Application-with-Secure-Credentials-Management/tree/dev'
+                git branch: 'dev', url: 'https://github.com/hamza-abdilahi/CRUD-Application-with-Secure-Credentials-Management.git'
             }
         }
 
@@ -28,9 +28,15 @@ pipeline {
 
         stage('Deliver') {
             steps {
-
                 echo 'Delivering application...'
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: '**/target/*.jar', allowEmptyArchive: true
+            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
