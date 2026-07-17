@@ -1,30 +1,45 @@
-
-pipeline{
+pipeline {
     agent any
-    tools{
-        maven 'maven'
+
+    environment {
+        POSTGRES_USER = 'postgres'
+        POSTGRES_PASSWORD = ''
+        POSTGRES_DB = 'mydatabase'
     }
-    stages{
-        stage("build"){
-            steps{
-                echo 'building something here..'
-                sh "mvn install"
-            }
-        }
-        stage("test"){
-            when{
-                expression{
-                    BRANCH_NAME = 'dev'
+
+    stages {
+        stage('Start PostgreSQL') {
+            steps {
+                script {
+                    //
+                    sh '''
+                    docker run -d --name postgres-container \
+                    -e POSTGRES_USER=${POSTGRES_USER} \
+                    -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+                    -e POSTGRES_DB=${POSTGRES_DB} \
+                    -p 5432:5432 postgres
+                    '''
                 }
             }
-            steps{
-                echo 'testing something. .'
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean install'
             }
         }
-        stage("deploy"){
-            steps{
-                echo 'deploying something!!'
+
+        stage('Stop PostgreSQL') {
+            steps {
+                sh 'docker rm -f postgres-container'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished!'
         }
     }
 }
+
